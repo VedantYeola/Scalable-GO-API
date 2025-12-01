@@ -9,10 +9,12 @@ import (
 
 type User struct {
 	ID        int64  `json:"id"`
-	Username  string `json:"username"`
-	Email     string `json:"email"`
-	Password  string `json:"-"`
-	CreatedAt string `json:"created_at"`
+	Username   string `json:"username"`
+    // first_name string `json:"first_name"`
+	// last_name  string `json:"last_name"`
+	Email      string `json:"email"`
+	Password   string `json:"-"`
+	CreatedAt  string `json:"created_at"`
 }
 
 type UsersStore struct {

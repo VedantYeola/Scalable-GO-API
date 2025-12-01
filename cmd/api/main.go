@@ -18,7 +18,7 @@ func main() {
 		addr: ":" + os.Getenv("PORT"),
 		db: dbConfig{
 		addr: os.Getenv("POSTGRESS_CONN"),
-			maxOpenConns : 30,
+			maxOpenConns :30,
 			maxIdleConns: 30,
 			maxIdleTime: "15m",
 		},
