@@ -1,0 +1,48 @@
+# version: '3.8'
+
+# services:
+#   db:
+#     image: postgres:16.3
+#     container_name: postgres-db
+#     environment:
+#       POSTGRES_DB: social
+#       POSTGRES_USER: admin
+#       POSTGRES_PASSWORD: adminpassword
+#     volumes:
+#       - db-data:/var/lib/postgresql/data
+#     ports:
+#       - "5433:5432"   # Map host 5433 → container 5432
+#     restart: unless-stopped
+
+# volumes:
+#   db-data:
+
+
+services:
+  db:
+    image: postgres:18
+    container_name: postgres-db
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_DB: social
+    ports:
+      - 5433:5432
+    volumes:
+      - db_data:/var/lib/postgresql    # 👈 Correct mount for Postgres 18+
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 128m
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 5000:8080
+
+volumes:
+  db_data:
+    driver: local
