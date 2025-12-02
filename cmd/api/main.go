@@ -9,21 +9,25 @@ import (
 	"github.com/sikozonpc/social/internal/env/store"
 )
 
+// const version = "0.0.1"
+
 func init() {
 	env.LoadEnv()
 }
-
+const version = "0.0.1"
 func main() {
 	cfg := config{
 		addr: ":" + os.Getenv("PORT"),
 		db: dbConfig{
-		addr: os.Getenv("POSTGRESS_CONN"),
+		addr: os.Getenv("POSTGRES_CONN"),
 			maxOpenConns :30,
 			maxIdleConns: 30,
 			maxIdleTime: "15m",
 		},
+		env: env.GetString("ENV", "development"),
+		
 	}
-
+		
 	db, err := db.New(
 		cfg.db.addr,
 		cfg.db.maxOpenConns,

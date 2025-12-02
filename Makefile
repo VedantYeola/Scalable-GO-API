@@ -1,5 +1,5 @@
 include .env
-
+export $(shell sed 's/=.*//' .env)
 MIGRATIONS_PATH := ./cmd/migrate/migrations
 
 .PHONY: migration

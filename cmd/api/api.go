@@ -20,6 +20,7 @@ type application struct {
  type config struct {
 	addr string
 	db	 dbConfig
+	env  string
  }
 
  type dbConfig struct {
@@ -44,15 +45,16 @@ type application struct {
 	
 	r.Route("/v1", func(r chi.Router){
 		r.Get("/health", app.healthCheckHandler)
+
+		r.Route("/posts", func(r chi.Router){		
+			r.Post("/", app.createPostHandler)
 	})
-
-
+	})
+	
 	return r
  }
 
  func (app *application) run(mux http.Handler) error{
-	
-	
 	srv := &http.Server{
 		Addr: app.config.addr,
 		Handler: mux,
